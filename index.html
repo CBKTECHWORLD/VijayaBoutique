@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijaya Boutique - Baby & Mom Essentials</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .top-bar {
+            background: #6c5ce7;
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.8rem 2rem;
+            background: #f5f5f5;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tab:hover, .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102,126,234,0.3);
+            border-color: #667eea;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-details p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .add-to-cart {
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .features {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 4rem 20px;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .feature p {
+            color: #666;
+        }
+
+        .testimonials {
+            background: white;
+            padding: 4rem 20px;
+        }
+
+        .testimonial-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .rating {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: #2d3436;
+            color: white;
+            padding: 3rem 20px 1rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .newsletter {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .newsletter button {
+            padding: 0.8rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .newsletter button:hover {
+            background: #764ba2;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: rgba(255,255,255,0.7);
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .header-main {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .newsletter {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <!-- 🎉 Free Shipping on Orders Above ₹999 | Use Code: ANGEL20 for 20% OFF -->
+    </div>
+
+    <header>
+        <div class="header-main">
+            <div class="logo">👼 Vijaya Boutique</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#features">Why Us</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Where Every Mom Finds Joy</h1>
+            <p>Premium quality baby and maternity products crafted with love. Your trusted partner in motherhood.</p>
+            <a href="#products" class="btn">Explore Collection</a>
+        </div>
+    </section>
+
+    <section class="container" id="products">
+        <div class="section-header">
+            <h2>Our Collections</h2>
+            <p>Carefully curated products for every stage of your journey</p>
+        </div>
+
+        <div class="category-tabs">
+            <div class="tab active">All Products</div>
+            <div class="tab">Baby Care</div>
+            <div class="tab">Mom Care</div>
+            <div class="tab">Accessories</div>
+        </div>
+
+        <div class="products">
+            <div class="product-card">
+                <div class="product-img">🍼</div>
+                <div class="product-details">
+                    <span class="product-category">BABY CARE</span>
+                    <h3>Premium Baby Bottle Set</h3>
+                    <p>Anti-colic bottles with soft silicone nipples. BPA-free and easy to clean.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from₹1,199</span>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">👶</div>
+                <div class="product-details">
+                    <span class="product-category">BABY CARE</span>
+                    <h3>Organic Baby Clothing</h3>
+                    <p>100% organic cotton onesies. Soft, breathable, and gentle on baby's skin.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from ₹899</span>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🤱</div>
+                <div class="product-details">
+                    <span class="product-category">MOM CARE</span>
+                    <h3>Nursing Pillow</h3>
+                    <p>Ergonomic design for comfortable feeding. Removable, washable cover.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from ₹1,599</span>
+                        <!--  <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🧴</div>
+                <div class="product-details">
+                    <span class="product-category">BABY CARE</span>
+                    <h3>Natural Baby Care Set</h3>
+                    <p>Complete bath set with gentle shampoo, body wash, and lotion. Tear-free formula.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from ₹749</span>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🧸</div>
+                <div class="product-details">
+                    <span class="product-category">ACCESSORIES</span>
+                    <h3>Soft Plush Toys</h3>
+                    <p>Hypoallergenic stuffed animals. Safe for newborns and toddlers.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from ₹599</span>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">👗</div>
+                <div class="product-details">
+                    <span class="product-category">MOM CARE</span>
+                    <h3>Maternity Wear Collection</h3>
+                    <p>Stylish and comfortable dresses for expecting mothers. Stretchy fabric.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from ₹1,999</span>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🛏️</div>
+                <div class="product-details">
+                    <span class="product-category">BABY CARE</span>
+                    <h3>Baby Bedding Set</h3>
+                    <p>Soft crib sheets and blankets. Breathable cotton for safe sleeping.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from ₹1,299</span>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🎒</div>
+                <div class="product-details">
+                    <span class="product-category">ACCESSORIES</span>
+                    <h3>Diaper Bag Backpack</h3>
+                    <p>Spacious mom bag with multiple pockets. Water-resistant and stylish.</p>
+                    <div class="product-footer">
+                        <span class="price">Starting from ₹2,199</span>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Why Choose Vijaya Boutique?</h2>
+            <p>We go the extra mile to ensure your satisfaction</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">✅</div>
+                <h3>Certified Quality</h3>
+                <p>All products are safety tested and certified for your peace of mind</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h3>Fast Delivery</h3>
+                <p>Express shipping available. Get your orders within 2-3 days</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💯</div>
+                <h3>100% Authentic</h3>
+                <p>Genuine products directly from trusted manufacturers</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔄</div>
+                <h3>Easy Returns</h3>
+                <p>30-day hassle-free return policy. Your satisfaction guaranteed</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>What Our Moms Say</h2>
+            <p>Real reviews from real parents</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p class="testimonial-text">"The quality of products is outstanding! My baby loves the soft cotton clothes. Will definitely order again."</p>
+                <p class="testimonial-author">- Priya Sharma, Delhi</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"Fast delivery and amazing customer service. The diaper bag is exactly what I needed. Highly recommended!"</p>
+                <p class="testimonial-author">- Neha Patel, Mumbai</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"Love the maternity wear collection. Comfortable and stylish. Vijaya Boutique is now my go-to store!"</p>
+                <p class="testimonial-author">- Anjali Singh, Bangalore</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>About Vijaya Boutique</h3>
+                <p>Your trusted partner in motherhood. We provide premium quality baby and maternity products with love and care.</p>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📌</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#products">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Return & Exchange</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe for exclusive offers and updates</p>
+                <div class="newsletter">
+                    <input type="email" placeholder="Enter your email">
+                    <button>Subscribe</button>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    📧 support@littleangels.com<br>
+                    📞 +91 9911054919<br>
+                    📍 Shakurpur,New Delhi, India
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Vijaya Boutique. All Rights Reserved. Made with 💜 for Moms & Babies</p>
+        </div>
+    </footer>
+</body>
+</html>
